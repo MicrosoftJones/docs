@@ -7,7 +7,6 @@ Content-Type: application/json
   "client_id": "${account.clientId}",
   "email": "EMAIL",
   "connection": "CONNECTION",
-  "organization": "ORGANIZATION_ID"
 }
 ```
 
@@ -15,7 +14,7 @@ Content-Type: application/json
 curl --request POST \
   --url https://${account.namespace}/dbconnections/change_password \
   --header 'content-type: application/json' \
-  --data '{"client_id": "${account.clientId}","email": "EMAIL", "connection": "CONNECTION", "organization": "ORGANIZATION_ID"}'
+  --data '{"client_id": "${account.clientId}","email": "EMAIL", "connection": "CONNECTION"}'
 ```
 
 ```javascript
@@ -29,8 +28,7 @@ curl --request POST \
   
   webAuth.changePassword({
     connection: 'CONNECTION',
-    email:   'EMAIL',
-    organization: 'ORGANIZATION_ID'
+    email:   'EMAIL'
   }, function (err, resp) {
     if(err){
       console.log(err.message);
@@ -54,11 +52,9 @@ curl --request POST \
 "We've just sent you an email to reset your password."
 ```
 
-Send a change password email to the user's provided email address and `connection`.
+Given a user's `email` address and a `connection`, Auth0 will send a change password email.
 
-Optionally, you may provide an Organization ID to support Organization-specific variables in [customized email templates](https://auth0.com/docs/customize/email/email-templates#common-variables) and to include the `organization_id` and `organization_name` parameters in the **Redirect To** URL.
-
-Note: This endpoint only works for database connections.
+This endpoint only works for database connections.
 
 ### Request Parameters
 
@@ -67,7 +63,6 @@ Note: This endpoint only works for database connections.
 | `client_id` | The `client_id` of your client. We strongly recommend including a Client ID so that the email template knows from which client the request was triggered. |
 | `email` <br/><span class="label label-danger">Required</span> | The user's email address. |
 | `connection` <br/><span class="label label-danger">Required</span> | The name of the database connection configured to your client. |
-| `organization` | The `organization_id` of the Organization associated with the user. |
 
 
 ### Remarks
